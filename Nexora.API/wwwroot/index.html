@@ -1,0 +1,278 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexora - Soluções em Tecnologia</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            background-color: #0f172a;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+            .navbar .logo {
+                font-size: 1.5rem;
+                font-weight: 700;
+                color: #38bdf8;
+                text-decoration: none;
+            }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+            .nav-links a {
+                color: #94a3b8;
+                text-decoration: none;
+                font-weight: 500;
+                transition: color 0.2s;
+            }
+
+                .nav-links a:hover {
+                    color: #ffffff;
+                }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            padding: 5rem 5%;
+            text-align: center;
+        }
+
+            .hero h1 {
+                font-size: 2.8rem;
+                margin-bottom: 1rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+                color: #94a3b8;
+                max-width: 600px;
+                margin: 0 auto 2rem;
+            }
+
+        .btn-primary {
+            display: inline-block;
+            background-color: #0284c7;
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+            .btn-primary:hover {
+                background-color: #0369a1;
+            }
+
+        /* Seções Genéricas */
+        .section-container {
+            padding: 4rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2.5rem;
+            color: #0f172a;
+        }
+
+        /* Grid de Cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+            .card h3 {
+                color: #0f172a;
+                margin-bottom: 0.75rem;
+            }
+
+            .card p {
+                color: #64748b;
+                font-size: 0.95rem;
+                margin-bottom: 1rem;
+            }
+
+        .card-tag {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #0284c7;
+            text-transform: uppercase;
+        }
+
+        /* Form Orçamento */
+        .form-section {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 0.4rem;
+                font-weight: 600;
+                font-size: 0.9rem;
+            }
+
+            .form-group input, .form-group textarea {
+                width: 100%;
+                padding: 0.75rem;
+                border: 1px solid #cbd5e1;
+                border-radius: 6px;
+                font-size: 0.95rem;
+            }
+
+        /* Footer */
+        footer {
+            background-color: #0f172a;
+            color: #64748b;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navegação -->
+    <nav class="navbar">
+        <a href="#" class="logo">Nexora</a>
+        <ul class="nav-links">
+            <li><a href="#servicos">Serviços</a></li>
+            <li><a href="#projetos">Projetos</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="#orcamento">Contato</a></li>
+            <li><a href="admin/index.html" style="color: #38bdf8;">Painel Admin</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Banner -->
+    <header class="hero">
+        <h1>Transformamos ideias em software de alto impacto</h1>
+        <p>Desenvolvimento web moderno, arquitetura sólida e soluções sob medida para alavancar seu negócio.</p>
+        <a href="#orcamento" class="btn-primary">Solicitar Orçamento</a>
+    </header>
+
+    <!-- Seção de Serviços -->
+    <section id="servicos" class="section-container">
+        <h2 class="section-title">Nossos Serviços</h2>
+        <div class="cards-grid" id="grid-servicos">
+            <p style="text-align:center; grid-column: 1/-1; color:#94a3b8;">Carregando serviços...</p>
+        </div>
+    </section>
+
+    <!-- Seção de Projetos em Destaque -->
+    <section id="projetos" style="background-color: #f1f5f9;">
+        <div class="section-container">
+            <h2 class="section-title">Projetos em Destaque</h2>
+            <div class="cards-grid" id="grid-projetos">
+                <p style="text-align:center; grid-column: 1/-1; color:#94a3b8;">Carregando projetos...</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Blog / Artigos -->
+    <section id="blog" class="section-container">
+        <h2 class="section-title">Artigos Recentes</h2>
+        <div class="cards-grid" id="grid-artigos">
+            <p style="text-align:center; grid-column: 1/-1; color:#94a3b8;">Carregando artigos...</p>
+        </div>
+    </section>
+
+    <!-- Seção de Solicitação de Orçamento -->
+    <section id="orcamento" style="background-color: #f1f5f9; padding-bottom: 4rem;">
+        <div class="section-container">
+            <h2 class="section-title">Solicite um Orçamento</h2>
+            <div class="form-section">
+                <form id="form-orcamento">
+                    <div class="form-group">
+                        <label for="cliente-nome">Seu Nome *</label>
+                        <input type="text" id="cliente-nome" required placeholder="Digite seu nome completo">
+                    </div>
+                    <div class="form-group">
+                        <label for="cliente-email">E-mail *</label>
+                        <input type="email" id="cliente-email" required placeholder="seu@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="cliente-telefone">Telefone / WhatsApp</label>
+                        <input type="tel" id="cliente-telefone" placeholder="(00) 00000-0000">
+                    </div>
+                    <div class="form-group">
+                        <label for="cliente-mensagem">Descrição do Projeto *</label>
+                        <textarea id="cliente-mensagem" rows="4" required placeholder="Descreva brevemente o que você precisa..."></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary" style="width: 100%;">Enviar Solicitação</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Nexora - Soluções em Tecnologia. Todos os direitos reservados.</p>
+    </footer>
+
+    <div id="modal-artigo-leitura" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); justify-content:center; align-items:center; z-index:2000; padding:1rem;">
+        <div style="background:white; padding:2rem; border-radius:8px; width:100%; max-width:700px; max-height:85vh; overflow-y:auto; position:relative;">
+            <h2 id="artigo-modal-titulo" style="color:#0f172a; margin-bottom:0.5rem;"></h2>
+            <p id="artigo-modal-data" style="font-size:0.85rem; color:#64748b; margin-bottom:1.5rem;"></p>
+            <div id="artigo-modal-conteudo" style="color:#334155; line-height:1.7; white-space:pre-wrap;"></div>
+            <div style="margin-top:2rem; text-align:right;">
+                <button onclick="fecharModalArtigoLeitura()" class="btn-primary" style="background:#64748b;">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

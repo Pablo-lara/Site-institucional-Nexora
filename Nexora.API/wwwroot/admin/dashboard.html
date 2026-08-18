@@ -1,0 +1,403 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexora - Painel do Administrador</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            min-height: 100vh;
+            background-color: #f1f5f9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Sidebar Navegação Lateral */
+        .sidebar {
+            width: 260px;
+            background-color: #0f172a;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 1.5rem;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+        }
+
+            .sidebar h2 {
+                font-size: 1.4rem;
+                color: #38bdf8;
+                margin-bottom: 2rem;
+                border-bottom: 1px solid #1e293b;
+                padding-bottom: 1rem;
+            }
+
+        .menu-list {
+            list-style: none;
+        }
+
+        .menu-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-link {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: #94a3b8;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+            .menu-link:hover, .menu-link.active {
+                background-color: #1e293b;
+                color: #ffffff;
+            }
+
+        .user-info {
+            border-top: 1px solid #1e293b;
+            padding-top: 1rem;
+        }
+
+        .user-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .user-email {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-bottom: 1rem;
+        }
+
+        .btn-logout {
+            width: 100%;
+            padding: 0.6rem;
+            background-color: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+            .btn-logout:hover {
+                background-color: #dc2626;
+            }
+
+        /* Conteúdo Principal */
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .header-title {
+            margin-bottom: 1.5rem;
+        }
+
+            .header-title h1 {
+                font-size: 1.8rem;
+                color: #0f172a;
+            }
+
+        /* Cards de Métricas */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .metric-card {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+            .metric-card h3 {
+                font-size: 0.9rem;
+                color: #64748b;
+                margin-bottom: 0.5rem;
+            }
+
+            .metric-card .value {
+                font-size: 1.8rem;
+                font-weight: 700;
+                color: #0f172a;
+            }
+
+        /* Tabela de Dados */
+        .data-table-container {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+            .data-table-container h2 {
+                font-size: 1.2rem;
+                color: #1e293b;
+                margin-bottom: 1rem;
+            }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.9rem;
+        }
+
+        th {
+            background-color: #f8fafc;
+            color: #475569;
+            font-weight: 600;
+        }
+
+        .badge {
+            padding: 0.25rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .badge-pendente {
+            background-color: #fef3c7;
+            color: #d97706;
+        }
+
+        .badge-aprovado {
+            background-color: #d1fae5;
+            color: #059669;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar Lateral com Links Âncora Atualizados -->
+    <aside class="sidebar">
+        <div>
+            <h2>Nexora Admin</h2>
+            <ul class="menu-list">
+                <li class="menu-item"><a href="#sec-orcamentos" class="menu-link active">Orçamentos</a></li>
+                <li class="menu-item"><a href="#sec-servicos" class="menu-link">Serviços</a></li>
+                <li class="menu-item"><a href="#sec-projetos" class="menu-link">Projetos</a></li>
+                <li class="menu-item"><a href="#sec-artigos" class="menu-link">Artigos</a></li>
+            </ul>
+        </div>
+
+        <div class="user-info">
+            <div class="user-name" id="user-nome">Administrador</div>
+            <div class="user-email" id="user-email">admin@nexora.com</div>
+            <button class="btn-logout" id="btn-logout">Sair</button>
+        </div>
+    </aside>
+
+    <!-- Área Principal de Conteúdo -->
+    <main class="main-content">
+        <div class="header-title">
+            <h1>Visão Geral</h1>
+        </div>
+
+        <!-- Métricas Rápidas -->
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <h3>Orçamentos Solicitados</h3>
+                <div class="value" id="qtd-orcamentos">0</div>
+            </div>
+            <div class="metric-card">
+                <h3>Serviços Ativos</h3>
+                <div class="value" id="total-servicos">0</div>
+            </div>
+            <div class="metric-card">
+                <h3>Projetos Publicados</h3>
+                <div class="value" id="total-projetos">0</div>
+            </div>
+        </div>
+
+        <!-- Seção de Orçamentos Recentes -->
+        <div id="sec-orcamentos" class="data-table-container">
+            <h2>Orçamentos Recentes</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>E-mail</th>
+                        <th>Telefone</th>
+                        <th>Data</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela-orcamentos">
+                    <tr>
+                        <td colspan="5" style="text-align: center; color: #94a3b8;">Carregando orçamentos...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Seção de Gerenciamento de Serviços -->
+        <div id="sec-servicos" class="data-table-container" style="margin-top: 2rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h2>Gerenciar Serviços</h2>
+                <button class="btn" id="btn-novo-servico" onclick="abrirModalServico()">+ Novo Serviço</button>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela-servicos-admin">
+                    <tr>
+                        <td colspan="3" style="text-align: center; color: #94a3b8;">Carregando serviços...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Seção de Gerenciamento de Projetos -->
+        <div id="sec-projetos" class="data-table-container" style="margin-top: 2rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h2>Gerenciar Projetos</h2>
+                <button class="btn" onclick="abrirModalProjeto()">+ Novo Projeto</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Cliente</th>
+                        <th>Destaque</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela-projetos-admin">
+                    <tr><td colspan="4" style="text-align: center; color: #94a3b8;">Carregando projetos...</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Seção de Gerenciamento de Artigos -->
+        <div id="sec-artigos" class="data-table-container" style="margin-top: 2rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h2>Gerenciar Artigos</h2>
+                <button class="btn" onclick="abrirModalArtigo()">+ Novo Artigo</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Status</th>
+                        <th>Data</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela-artigos-admin">
+                    <tr><td colspan="4" style="text-align: center; color: #94a3b8;">Carregando artigos...</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Modais Mantidos Dentro da Main -->
+        <div id="modal-servico" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); justify-content:center; align-items:center;">
+            <div style="background:white; padding:2rem; border-radius:8px; width:100%; max-width:500px;">
+                <h3 id="modal-titulo">Novo Serviço</h3>
+                <form id="form-servico" style="margin-top:1rem;">
+                    <input type="hidden" id="servico-id">
+                    <div class="form-group" style="margin-bottom:1rem;">
+                        <label>Nome do Serviço</label>
+                        <input type="text" id="servico-nome" required style="width:100%; padding:0.5rem; margin-top:0.3rem;">
+                    </div>
+                    <div class="form-group" style="margin-bottom:1rem;">
+                        <label>Descrição</label>
+                        <textarea id="servico-descricao" required style="width:100%; padding:0.5rem; margin-top:0.3rem; height:80px;"></textarea>
+                    </div>
+                    <div style="display:flex; justify-content:flex-end; gap:0.5rem;">
+                        <button type="button" onclick="fecharModalServico()" style="padding:0.5rem 1rem; background:#cbd5e1; border:none; border-radius:4px; cursor:pointer;">Cancelar</button>
+                        <button type="submit" class="btn">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="modal-projeto" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); justify-content:center; align-items:center;">
+            <div style="background:white; padding:2rem; border-radius:8px; width:100%; max-width:500px;">
+                <h3>Novo Projeto</h3>
+                <form id="form-projeto" style="margin-top:1rem;">
+                    <div class="form-group" style="margin-bottom:1rem;">
+                        <label>Título</label>
+                        <input type="text" id="projeto-titulo" required style="width:100%; padding:0.5rem; margin-top:0.3rem;">
+                    </div>
+                    <div class="form-group" style="margin-bottom:1rem;">
+                        <label>Descrição Resumida</label>
+                        <textarea id="projeto-descricao" required style="width:100%; padding:0.5rem; margin-top:0.3rem; height:60px;"></textarea>
+                    </div>
+                    <div class="form-group" style="margin-bottom:1rem;">
+                        <label>Cliente</label>
+                        <input type="text" id="projeto-cliente" style="width:100%; padding:0.5rem; margin-top:0.3rem;">
+                    </div>
+                    <div class="form-group" style="margin-bottom:1rem; display:flex; align-items:center; gap:0.5rem;">
+                        <input type="checkbox" id="projeto-destaque">
+                        <label for="projeto-destaque" style="margin:0;">Exibir em Destaque na Home</label>
+                    </div>
+                    <div style="display:flex; justify-content:flex-end; gap:0.5rem;">
+                        <button type="button" onclick="fecharModalProjeto()" style="padding:0.5rem 1rem; background:#cbd5e1; border:none; border-radius:4px; cursor:pointer;">Cancelar</button>
+                        <button type="submit" class="btn">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="modal-artigo" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); justify-content:center; align-items:center;">
+            <div style="background:white; padding:2rem; border-radius:8px; width:100%; max-width:550px;">
+                <h3>Novo Artigo</h3>
+                <form id="form-artigo" style="margin-top:1rem;">
+                    <div class="form-group" style="margin-bottom:1rem;">
+                        <label>Título</label>
+                        <input type="text" id="artigo-titulo" required style="width:100%; padding:0.5rem; margin-top:0.3rem;">
+                    </div>
+                    <div class="form-group" style="margin-bottom:1rem;">
+                        <label>Resumo</label>
+                        <input type="text" id="artigo-resumo" required style="width:100%; padding:0.5rem; margin-top:0.3rem;">
+                    </div>
+                    <div class="form-group" style="margin-bottom:1rem;">
+                        <label>Conteúdo</label>
+                        <textarea id="artigo-conteudo" required style="width:100%; padding:0.5rem; margin-top:0.3rem; height:100px;"></textarea>
+                    </div>
+                    <div class="form-group" style="margin-bottom:1rem; display:flex; align-items:center; gap:0.5rem;">
+                        <input type="checkbox" id="artigo-publicado" checked>
+                        <label for="artigo-publicado" style="margin:0;">Publicar imediatamente</label>
+                    </div>
+                    <div style="display:flex; justify-content:flex-end; gap:0.5rem;">
+                        <button type="button" onclick="fecharModalArtigo()" style="padding:0.5rem 1rem; background:#cbd5e1; border:none; border-radius:4px; cursor:pointer;">Cancelar</button>
+                        <button type="submit" class="btn">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>
